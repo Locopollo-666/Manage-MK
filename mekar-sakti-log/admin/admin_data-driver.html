@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Driver - PT. MEKAR SAKTI LOGISTIK</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .sidebar-active {
+      transform: translateX(0);
+    }
+    .hamburger span {
+      transition: all 0.3s ease-in-out;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  </style>
+</head>
+<body class="m-0 p-0 min-h-screen flex flex-col text-sm sm:text-base">
+  <!-- Header -->
+  <header class="flex justify-between items-center border-b border-black bg-gray-300 px-4 py-2 relative">
+    <div class="flex items-center gap-4">
+      <button id="menuBtn" class="hamburger bg-red-700 border border-black rounded-md w-10 h-10 flex flex-col justify-center space-y-1.5 px-2 py-1">
+        <span class="block h-[2px] w-full bg-black rounded"></span>
+        <span class="block h-[2px] w-full bg-black rounded"></span>
+        <span class="block h-[2px] w-full bg-black rounded"></span>
+      </button>
+      <div href="admin_dashboard.html" class="border border-black text-red-600 font-bold text-xl w-16 h-16 flex items-center justify-center">MS</div>
+    </div>
+
+    <div class="text-center text-xs sm:text-sm">
+      <h1 class="text-red-600 font-bold">PT. MEKAR SAKTI LOGISTIK</h1>
+      <p>Jl. Kampung Bandan I Komplek Stasiun Jakarta</p>
+      <p>Gudang Pintu No. 16</p>
+      <p>Jakarta Utara</p>
+    </div>
+
+    <div class="relative">
+      <button id="adminBtn" class="flex flex-col items-center focus:outline-none">
+        <div class="bg-blue-700 rounded-full w-12 h-12 flex items-center justify-center border border-black">
+          <i class="fas fa-user text-white text-xl"></i>
+        </div>
+        <span class="text-black text-xs mt-1">Admin</span>
+      </button>
+      <div id="adminDropdown" class="absolute right-0 mt-1 bg-white border border-black rounded shadow hidden z-50 text-sm w-32">
+        <a href="#edit-profile" class="block px-4 py-2 hover:bg-gray-100">Edit Profil</a>
+        <a href="#logout" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-1 min-h-0 relative">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar absolute left-0 top-0 h-full w-64 bg-[#c3c8cd] border-r border-black z-50 text-sm">
+      <div class="flex flex-col h-full">
+        <a href="admin_dashboard.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-home mr-2"></i> HOME</a>
+        <a href="admin_data-barang.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-boxes mr-2"></i> DATA BARANG</a>
+        <a href="admin_data-pengiriman.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-shipping-fast mr-2"></i> DATA PENGIRIMAN</a>
+        <a href="admin_data-driver.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300 bg-gray-200"><i class="fas fa-user-friends mr-2"></i> DATA DRIVER</a>
+        <a href="admin_tracking.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-map-marked-alt mr-2"></i> TRACKING</a>
+        <a href="admin_laporan.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-file-alt mr-2"></i> LAPORAN</a>
+        <a href="admin_tagihan.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-file-invoice-dollar mr-2"></i> TAGIHAN</a>
+        <a href="admin_pengaturan.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-cog mr-2"></i> PENGATURAN</a>
+        <div class="text-[6px] text-center text-black mt-auto mb-1 select-text">Copyright @KP25</div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1 bg-gradient-to-b from-slate-600 to-slate-200 p-4 overflow-auto">
+      <div class="max-w-6xl mx-auto mt-6">
+        <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">DATA DRIVER</h2>
+        
+        <!-- Tombol Tambah -->
+        <div class="mb-4">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            <i class="fas fa-plus mr-2"></i>Tambah Driver
+          </button>
+        </div>
+
+        <!-- Tabel Data Driver -->
+        <div class="overflow-x-auto bg-white rounded shadow border border-black">
+          <table class="min-w-full text-sm text-black border-collapse">
+            <thead class="bg-gray-300 text-left">
+              <tr>
+                <th class="border border-black px-4 py-2">No</th>
+                <th class="border border-black px-4 py-2">Nama</th>
+                <th class="border border-black px-4 py-2">Plat Nomor</th>
+                <th class="border border-black px-4 py-2">Kontak</th>
+                <th class="border border-black px-4 py-2">Status</th>
+                <th class="border border-black px-4 py-2">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Contoh Data -->
+              <tr>
+                <td class="border border-black px-4 py-2">1</td>
+                <td class="border border-black px-4 py-2">Budi Santoso</td>
+                <td class="border border-black px-4 py-2">B 1234 CD</td>
+                <td class="border border-black px-4 py-2">08123456789</td>
+                <td class="border border-black px-4 py-2">Aktif</td>
+                <td class="border border-black px-4 py-2">
+                  <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded mr-2"><i class="fas fa-edit"></i></button>
+                  <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Modal Tambah Driver -->
+      <div id="modalTambah" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded shadow w-full max-w-md">
+          <h3 class="text-lg font-bold mb-4">Tambah Driver</h3>
+          <form id="formDriver">
+            <input type="text" id="namaDriver" placeholder="Nama Driver" class="w-full mb-2 px-3 py-2 border rounded" required>
+            <input type="text" id="platNomor" placeholder="Plat Nomor" class="w-full mb-2 px-3 py-2 border rounded" required>
+            <input type="text" id="kontak" placeholder="Kontak" class="w-full mb-2 px-3 py-2 border rounded" required>
+            <select id="status" class="w-full mb-4 px-3 py-2 border rounded" required>
+              <option value="" disabled selected>Status</option>
+              <option value="Aktif">Aktif</option>
+              <option value="Tidak Aktif">Tidak Aktif</option>
+            </select>
+            <div class="flex justify-end">
+              <button type="button" id="batalBtn" class="mr-2 px-4 py-2 bg-gray-400 text-white rounded">Batal</button>
+              <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const adminBtn = document.getElementById('adminBtn');
+    const adminDropdown = document.getElementById('adminDropdown');
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sidebar.classList.toggle('sidebar-active');
+      menuBtn.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+        sidebar.classList.remove('sidebar-active');
+        menuBtn.classList.remove('active');
+      }
+
+      if (!adminDropdown.contains(event.target) && !adminBtn.contains(event.target)) {
+        adminDropdown.classList.add('hidden');
+      }
+    });
+
+    adminBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      adminDropdown.classList.toggle('hidden');
+    });
+
+    // CRUD Driver
+    let dataDriver = [];
+    const modalTambah = document.getElementById('modalTambah');
+    const formDriver = document.getElementById('formDriver');
+    const batalBtn = document.getElementById('batalBtn');
+    const tambahBtn = document.querySelector('button.bg-blue-600');
+    const tbody = document.querySelector('tbody');
+
+    tambahBtn.addEventListener('click', () => {
+      modalTambah.classList.remove('hidden');
+      formDriver.reset();
+      formDriver.dataset.editing = '';
+    });
+
+    batalBtn.addEventListener('click', () => {
+      modalTambah.classList.add('hidden');
+    });
+
+    formDriver.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nama = document.getElementById('namaDriver').value;
+      const platNomor = document.getElementById('platNomor').value;
+      const kontak = document.getElementById('kontak').value;
+      const status = document.getElementById('status').value;
+
+      const isEditing = formDriver.dataset.editing;
+      if (isEditing) {
+        const index = parseInt(isEditing);
+        dataDriver[index] = { nama, platNomor, kontak, status };
+      } else {
+        dataDriver.push({ nama, platNomor, kontak, status });
+      }
+
+      renderTable();
+      modalTambah.classList.add('hidden');
+    });
+
+    function renderTable() {
+      tbody.innerHTML = '';
+      dataDriver.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="border border-black px-4 py-2">${index + 1}</td>
+          <td class="border border-black px-4 py-2">${item.nama}</td>
+          <td class="border border-black px-4 py-2">${item.platNomor}</td>
+          <td class="border border-black px-4 py-2">${item.kontak}</td>
+          <td class="border border-black px-4 py-2">${item.status}</td>
+          <td class="border border-black px-4 py-2">
+            <button onclick="editDriver(${index})" class="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded mr-2"><i class="fas fa-edit"></i></button>
+            <button onclick="hapusDriver(${index})" class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded"><i class="fas fa-trash"></i></button>
+          </td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.editDriver = function (index) {
+      const driver = dataDriver[index];
+      document.getElementById('namaDriver').value = driver.nama;
+      document.getElementById('platNomor').value = driver.platNomor;
+      document.getElementById('kontak').value = driver.kontak;
+      document.getElementById('status').value = driver.status;
+      formDriver.dataset.editing = index;
+      modalTambah.classList.remove('hidden');
+    };
+
+    window.hapusDriver = function (index) {
+      if (confirm('Yakin ingin menghapus driver ini?')) {
+        dataDriver.splice(index, 1);
+        renderTable();
+      }
+    };
+
+    // Data dummy awal
+    dataDriver = [
+      { nama: "Budi Santoso", platNomor: "B 1234 CD", kontak: "08123456789", status: "Aktif" }
+    ];
+    renderTable();
+  </script>
+</body>
+</html>

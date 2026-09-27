@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Pengiriman - PT. MEKAR SAKTI LOGISTIK</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .sidebar-active {
+      transform: translateX(0);
+    }
+    .hamburger span {
+      transition: all 0.3s ease-in-out;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  </style>
+</head>
+<body class="m-0 p-0 min-h-screen flex flex-col text-sm sm:text-base">
+  <!-- Header -->
+  <header class="flex justify-between items-center border-b border-black bg-gray-300 px-4 py-2 relative">
+    <div class="flex items-center gap-4">
+      <button id="menuBtn" class="hamburger bg-red-700 border border-black rounded-md w-10 h-10 flex flex-col justify-center space-y-1.5 px-2 py-1">
+        <span class="block h-[2px] w-full bg-black rounded"></span>
+        <span class="block h-[2px] w-full bg-black rounded"></span>
+        <span class="block h-[2px] w-full bg-black rounded"></span>
+      </button>
+      <div class="border border-black text-red-600 font-bold text-xl w-16 h-16 flex items-center justify-center">
+        MS
+      </div>
+    </div>
+
+    <div class="text-center text-xs sm:text-sm">
+      <h1 class="text-red-600 font-bold">PT. MEKAR SAKTI LOGISTIK</h1>
+      <p>Jl. Kampung Bandan I Komplek Stasiun Jakarta</p>
+      <p>Gudang Pintu No. 16</p>
+      <p>Jakarta Utara</p>
+    </div>
+
+    <!-- Admin -->
+    <div class="relative">
+      <button id="adminBtn" class="flex flex-col items-center focus:outline-none">
+        <div class="bg-blue-700 rounded-full w-12 h-12 flex items-center justify-center border border-black">
+          <i class="fas fa-user text-white text-xl"></i>
+        </div>
+        <span class="text-black text-xs mt-1">Driver</span>
+      </button>
+      <!-- Dropdown -->
+      <div id="adminDropdown" class="absolute right-0 mt-1 bg-white border border-black rounded shadow hidden z-50 text-sm w-32">
+        <a href="#edit-profile" class="block px-4 py-2 hover:bg-gray-100">Edit Profil</a>
+        <a href="./login.html" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-1 min-h-0 relative">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar absolute left-0 top-0 h-full w-64 bg-[#c3c8cd] border-r border-black z-50 text-sm">
+      <div class="flex flex-col h-full">
+        <a href="driver_dashboard.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-home mr-2"></i> HOME</a>
+        <a href="driver_data-pengiriman.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300 bg-gray-200"><i class="fas fa-shipping-fast mr-2"></i> DATA PENGIRIMAN</a>        <a href="driver_tracking.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-map-marked-alt mr-2"></i> TRACKING</a>
+        <a href="driver_pengaturan.html" class="flex items-center border-b border-black px-2 py-2 hover:bg-gray-300"><i class="fas fa-cog mr-2"></i> PENGATURAN</a>
+        <div class="text-[6px] text-center text-black mt-auto mb-1 select-text">Copyright @KP25</div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1 bg-gradient-to-b from-slate-600 to-slate-200 p-4 overflow-auto">
+      <div class="max-w-6xl mx-auto mt-6">
+        <h2 class="text-2xl font-bold text-white mb-6">DATA PENGIRIMAN</h2>
+        
+        <!-- Tombol Tambah -->
+        <div class="mb-4">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            <i class="fas fa-plus mr-2"></i>Tambah Pengiriman
+          </button>
+        </div>
+
+        <!-- Tabel Data Pengiriman -->
+        <div class="overflow-x-auto bg-white rounded shadow border border-black">
+          <table class="min-w-full text-sm text-black border-collapse">
+            <thead class="bg-gray-300 text-left">
+              <tr>
+                <th class="border border-black px-4 py-2">No</th>
+                <th class="border border-black px-4 py-2">Tanggal</th>
+                <th class="border border-black px-4 py-2">Nama Penerima</th>
+                <th class="border border-black px-4 py-2">Alamat</th>
+                <th class="border border-black px-4 py-2">Status</th>
+                <th class="border border-black px-4 py-2">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Contoh Data -->
+              <tr>
+                <td class="border border-black px-4 py-2">1</td>
+                <td class="border border-black px-4 py-2">2025-05-09</td>
+                <td class="border border-black px-4 py-2">Budi</td>
+                <td class="border border-black px-4 py-2">Jl. Merdeka No. 5</td>
+                <td class="border border-black px-4 py-2">Dalam Pengiriman</td>
+                <td class="border border-black px-4 py-2">
+                  <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded mr-2"><i class="fas fa-edit"></i></button>
+                  <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Modal Tambah Pengiriman -->
+      <div id="modalTambah" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded shadow w-full max-w-md">
+          <h3 class="text-lg font-bold mb-4">Tambah Pengiriman</h3>
+          <form id="formPengiriman">
+            <div class="mb-4">
+              <label class="block font-semibold mb-1">Tanggal</label>
+              <input type="date" id="tanggal" class="w-full border border-black rounded px-3 py-2" required>
+            </div>
+            <div class="mb-4">
+              <label class="block font-semibold mb-1">Nama Penerima</label>
+              <input type="text" id="namaPenerima" class="w-full border border-black rounded px-3 py-2" required>
+            </div>
+            <div class="mb-4">
+              <label class="block font-semibold mb-1">Alamat</label>
+              <input type="text" id="alamat" class="w-full border border-black rounded px-3 py-2" required>
+            </div>
+            <div class="mb-4">
+              <label class="block font-semibold mb-1">Status</label>
+              <select id="status" class="w-full border border-black rounded px-3 py-2" required>
+                <option value="Dalam Pengiriman">Dalam Pengiriman</option>
+                <option value="Terkirim">Terkirim</option>
+                <option value="Dibatalkan">Dibatalkan</option>
+              </select>
+            </div>
+            <div class="flex justify-end">
+              <button type="button" id="batalBtn" class="mr-2 px-4 py-2 bg-gray-400 text-white rounded">Batal</button>
+              <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const adminBtn = document.getElementById('adminBtn');
+    const adminDropdown = document.getElementById('adminDropdown');
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sidebar.classList.toggle('sidebar-active');
+      menuBtn.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+        sidebar.classList.remove('sidebar-active');
+        menuBtn.classList.remove('active');
+      }
+
+      if (!adminDropdown.contains(event.target) && !adminBtn.contains(event.target)) {
+        adminDropdown.classList.add('hidden');
+      }
+    });
+
+    adminBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      adminDropdown.classList.toggle('hidden');
+    });
+
+    // CRUD Pengiriman
+    let dataPengiriman = [];
+    const modalTambah = document.getElementById('modalTambah');
+    const formPengiriman = document.getElementById('formPengiriman');
+    const batalBtn = document.getElementById('batalBtn');
+    const tambahBtn = document.querySelector('button.bg-blue-600');
+    const tbody = document.querySelector('tbody');
+
+    tambahBtn.addEventListener('click', () => {
+      modalTambah.classList.remove('hidden');
+      formPengiriman.reset();
+      formPengiriman.dataset.editing = '';
+    });
+
+    batalBtn.addEventListener('click', () => {
+      modalTambah.classList.add('hidden');
+    });
+
+    formPengiriman.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const tanggal = document.getElementById('tanggal').value;
+      const namaPenerima = document.getElementById('namaPenerima').value;
+      const alamat = document.getElementById('alamat').value;
+      const status = document.getElementById('status').value;
+
+      const isEditing = formPengiriman.dataset.editing;
+      if (isEditing) {
+        const index = parseInt(isEditing);
+        dataPengiriman[index] = { tanggal, namaPenerima, alamat, status };
+      } else {
+        dataPengiriman.push({ tanggal, namaPenerima, alamat, status });
+      }
+
+      renderTable();
+      modalTambah.classList.add('hidden');
+    });
+
+    function renderTable() {
+      tbody.innerHTML = '';
+      dataPengiriman.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="border border-black px-4 py-2">${index + 1}</td>
+          <td class="border border-black px-4 py-2">${item.tanggal}</td>
+          <td class="border border-black px-4 py-2">${item.namaPenerima}</td>
+          <td class="border border-black px-4 py-2">${item.alamat}</td>
+          <td class="border border-black px-4 py-2">${item.status}</td>
+          <td class="border border-black px-4 py-2">
+            <button onclick="editPengiriman(${index})" class="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded mr-2"><i class="fas fa-edit"></i></button>
+            <button onclick="hapusPengiriman(${index})" class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded"><i class="fas fa-trash"></i></button>
+          </td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.editPengiriman = function (index) {
+      const pengiriman = dataPengiriman[index];
+      document.getElementById('tanggal').value = pengiriman.tanggal;
+      document.getElementById('namaPenerima').value = pengiriman.namaPenerima;
+      document.getElementById('alamat').value = pengiriman.alamat;
+      document.getElementById('status').value = pengiriman.status;
+      formPengiriman.dataset.editing = index;
+      modalTambah.classList.remove('hidden');
+    };
+
+    window.hapusPengiriman = function (index) {
+      if (confirm('Yakin ingin menghapus pengiriman ini?')) {
+        dataPengiriman.splice(index, 1);
+        renderTable();
+      }
+    };
+
+    // Data dummy awal
+    dataPengiriman = [
+      { tanggal: "2025-05-09", namaPenerima: "Budi", alamat: "Jl. Merdeka No. 5", status: "Dalam Pengiriman" }
+    ];
+    renderTable();
+  </script>
+</body>
+</html>
