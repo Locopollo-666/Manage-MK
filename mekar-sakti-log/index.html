@@ -4,27 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login - PT. MEKAR SAKTI LOGISTIK</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
   <style>
     .bg-gradient-custom {
       background: linear-gradient(to bottom, #f9f9f9, #6e7a8a);
     }
   </style>
 </head>
+
 <body class="bg-red-400 min-h-screen flex items-center justify-center p-4">
+
   <div class="border border-black w-72 bg-gradient-custom flex flex-col items-center p-4">
+
     <div class="border border-black w-12 h-12 flex items-center justify-center mb-2">
       <span class="text-red-600 font-sans text-xl font-normal">MS</span>
     </div>
+
     <div class="text-red-600 font-sans font-semibold text-sm mb-4 select-none">
       PT. MEKAR SAKTI LOGISTIK
     </div>
+
     <form id="loginForm" class="w-full space-y-3">
+
+      <!-- Username -->
       <div class="relative">
         <span class="absolute inset-y-0 left-3 flex items-center text-gray-500 text-xs">
           <i class="fas fa-user"></i>
         </span>
+
         <input
           type="text"
           name="username"
@@ -32,35 +42,34 @@
           class="w-full pl-9 pr-2 py-1.5 border border-black rounded text-xs font-sans"
           required>
       </div>
+
+      <!-- Password -->
       <div class="relative">
         <span class="absolute inset-y-0 left-3 flex items-center text-gray-500 text-xs">
           <i class="fas fa-lock"></i>
         </span>
+
         <input
           type="password"
           name="password"
-          placeholder="**********"
+          placeholder="PASSWORD"
           class="w-full pl-9 pr-2 py-1.5 border border-black rounded text-xs font-sans"
           required>
       </div>
-      <div>
-        <select name="role" class="w-full border border-black rounded px-3 py-2 text-xs" required>
-          <option value="">Pilih Role</option>
-          <option value="admin">Admin</option>
-          <option value="driver">Driver</option>
-          <option value="owner">Owner</option>
-          <option value="operasional">Staff Operasional</option>
-        </select>
-      </div>
+
+      <!-- Tombol Login -->
       <button
         type="submit"
         class="w-full bg-red-700 text-white text-xs font-sans font-semibold py-1.5 rounded">
         LOGIN
       </button>
+
     </form>
+
     <div class="w-full border-t border-black mt-4 pt-1 text-center text-gray-600 text-[9px] font-sans select-none">
       Copyright @KP26
     </div>
+
   </div>
 
   <script>
@@ -68,24 +77,61 @@
       e.preventDefault();
 
       const users = {
-        admin: { password: 'admin123', nama: 'Admin Utama', path: './admin/admin_dashboard.html', key: 'Admin' },
-        driver: { password: 'driver123', nama: 'Budi Santoso', path: './driver/driver_dashboard.html', key: 'Driver' },
-        owner: { password: 'owner123', nama: 'Pak Joko', path: './owner/owner_dashboard.html', key: 'Owner' },
-        operasional: { password: 'operasional123', nama: 'Staff Operasional', path: './staff_operasional/so_dashboard.html', key: 'StaffOperasional' }
+        admin: {
+          username: 'admin',
+          password: 'admin123',
+          nama: 'Admin Utama',
+          path: './admin/admin_dashboard.html',
+          key: 'Admin'
+        },
+
+        driver: {
+          username: 'driver',
+          password: 'driver123',
+          nama: 'Budi Santoso',
+          path: './driver/driver_dashboard.html',
+          key: 'Driver'
+        },
+
+        owner: {
+          username: 'owner',
+          password: 'owner123',
+          nama: 'Pak Joko',
+          path: './owner/owner_dashboard.html',
+          key: 'Owner'
+        },
+
+        operasional: {
+          username: 'operasional',
+          password: 'operasional123',
+          nama: 'Staff Operasional',
+          path: './staff_operasional/so_dashboard.html',
+          key: 'StaffOperasional'
+        }
       };
 
-      const username = document.querySelector('[name="username"]').value.trim();
-      const password = document.querySelector('[name="password"]').value;
-      const role = document.querySelector('[name="role"]').value;
+      const username = document
+        .querySelector('[name="username"]')
+        .value.trim()
+        .toLowerCase();
 
-      if (users[role] && password === users[role].password) {
-        sessionStorage.setItem(role, role);
-        sessionStorage.setItem(users[role].key, users[role].nama);
-        window.location.href = users[role].path;
+      const password = document
+        .querySelector('[name="password"]')
+        .value;
+
+      // Cari akun berdasarkan username dan password
+      const user = Object.values(users).find(function(u) {
+        return u.username === username && u.password === password;
+      });
+
+      if (user) {
+        sessionStorage.setItem(user.key, user.nama);
+        window.location.href = user.path;
       } else {
-        alert('Login gagal! Cek kembali username, password, dan role.');
+        alert('Login gagal! Username atau password salah.');
       }
     });
   </script>
+
 </body>
 </html>
