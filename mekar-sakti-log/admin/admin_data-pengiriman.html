@@ -60,7 +60,7 @@
       <!-- Dropdown -->
       <div id="adminDropdown" class="absolute right-0 mt-1 bg-white border border-black rounded shadow hidden z-50 text-sm w-32">
         <a href="#edit-profile" class="block px-4 py-2 hover:bg-gray-100">Edit Profil</a>
-        <a href="#logout" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
+        <a href="../index.html" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
       </div>
     </div>
   </header>
@@ -100,6 +100,7 @@
               <tr>
                 <th class="border border-black px-4 py-2">No</th>
                 <th class="border border-black px-4 py-2">Tanggal</th>
+                <th class="border border-black px-4 py-2">No. Resi</th>
                 <th class="border border-black px-4 py-2">Nama Penerima</th>
                 <th class="border border-black px-4 py-2">Alamat</th>
                 <th class="border border-black px-4 py-2">Status</th>
@@ -111,6 +112,7 @@
               <tr>
                 <td class="border border-black px-4 py-2">1</td>
                 <td class="border border-black px-4 py-2">2025-05-09</td>
+                <td class="border border-black px-4 py-2">446634</td>
                 <td class="border border-black px-4 py-2">Budi</td>
                 <td class="border border-black px-4 py-2">Jl. Merdeka No. 5</td>
                 <td class="border border-black px-4 py-2">Dalam Pengiriman</td>
@@ -132,6 +134,10 @@
             <div class="mb-4">
               <label class="block font-semibold mb-1">Tanggal</label>
               <input type="date" id="tanggal" class="w-full border border-black rounded px-3 py-2" required>
+            </div>
+            <div class="mb-4">
+              <label class="block font-semibold mb-1">No. Resi</label>
+              <input type="text" id="noResi" class="w-full border border-black rounded px-3 py-2" required>
             </div>
             <div class="mb-4">
               <label class="block font-semibold mb-1">Nama Penerima</label>
@@ -208,6 +214,7 @@
     formPengiriman.addEventListener('submit', function (e) {
       e.preventDefault();
       const tanggal = document.getElementById('tanggal').value;
+      const noResi = document.getElementById('noResi').value;
       const namaPenerima = document.getElementById('namaPenerima').value;
       const alamat = document.getElementById('alamat').value;
       const status = document.getElementById('status').value;
@@ -215,9 +222,9 @@
       const isEditing = formPengiriman.dataset.editing;
       if (isEditing) {
         const index = parseInt(isEditing);
-        dataPengiriman[index] = { tanggal, namaPenerima, alamat, status };
+        dataPengiriman[index] = { tanggal,noResi, namaPenerima, alamat, status };
       } else {
-        dataPengiriman.push({ tanggal, namaPenerima, alamat, status });
+        dataPengiriman.push({ tanggal, noResi, namaPenerima, alamat, status });
       }
 
       renderTable();
@@ -231,6 +238,7 @@
         tr.innerHTML = `
           <td class="border border-black px-4 py-2">${index + 1}</td>
           <td class="border border-black px-4 py-2">${item.tanggal}</td>
+          <td class="border border-black px-4 py-2">${item.noResi}</td>
           <td class="border border-black px-4 py-2">${item.namaPenerima}</td>
           <td class="border border-black px-4 py-2">${item.alamat}</td>
           <td class="border border-black px-4 py-2">${item.status}</td>
@@ -245,6 +253,7 @@
     window.editPengiriman = function (index) {
       const pengiriman = dataPengiriman[index];
       document.getElementById('tanggal').value = pengiriman.tanggal;
+      document.getElementById('noResi').value = pengiriman.noResi;
       document.getElementById('namaPenerima').value = pengiriman.namaPenerima;
       document.getElementById('alamat').value = pengiriman.alamat;
       document.getElementById('status').value = pengiriman.status;
@@ -261,7 +270,7 @@
 
     // Data dummy awal
     dataPengiriman = [
-      { tanggal: "2025-05-09", namaPenerima: "Budi", alamat: "Jl. Merdeka No. 5", status: "Dalam Pengiriman" }
+      { tanggal: "2025-05-09", noResi: "446634", namaPenerima: "Budi", alamat: "Jl. Merdeka No. 5", status: "Dalam Pengiriman" }
     ];
     renderTable();
   </script>
